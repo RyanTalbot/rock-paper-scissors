@@ -1,16 +1,31 @@
 <script>
 
-    function computerPlay() {
-        let computerChoice = Math.floor(Math.random() * 3 + 1)
-
-        switch (computerChoice) {
-            case 1:
-                return 'Rock'
-            case 2:
-                return 'Paper'
-            case 3:
-                return 'Scissors'
-        }
+    function computerSelection() {
+        let computerChoice = ['rock', 'paper', 'scissors']
+        return computerChoice[Math.floor(Math.random() * computerChoice.length)]
     }
+
+    function playerSelection() {
+        let playerChoice = prompt('Rock, Paper or Scissors?').toLowerCase()
+        return playerChoice
+    }
+
+    function playRound(playerSelection, computerSelection) {
+
+        let playerPick = playerSelection()
+        let compPick = computerSelection()
+
+        if ((playerPick == 'rock' && compPick == 'scissors') ||
+            (playerPick == 'paper' && compPick == 'rock') ||
+            (playerPick == 'scissors' && compPick == 'paper')) {
+                return `You win, ${playerPick} beats ${compPick}`
+            } else if (playerPick == compPick) {
+                return `Computer also chose ${compPick}, it's a tie!`
+            } else {
+                return `You lose, ${compPick} beats ${playerPick}`
+            }
+    }
+
+    console.log(playRound(playerSelection, computerSelection))
 
 </script>
