@@ -1,5 +1,8 @@
 <script>
 
+    let playerScore = 0;
+    let computerScore = 0;
+
     function computerSelection() {
         let computerChoice = ['rock', 'paper', 'scissors']
         return computerChoice[Math.floor(Math.random() * computerChoice.length)]
@@ -18,14 +21,29 @@
         if ((playerPick == 'rock' && compPick == 'scissors') ||
             (playerPick == 'paper' && compPick == 'rock') ||
             (playerPick == 'scissors' && compPick == 'paper')) {
-                return `You win, ${playerPick} beats ${compPick}`
+                playerScore++
+                return `You win, ${playerPick} beats ${compPick} - Score: ${playerScore} - ${computerScore}`
             } else if (playerPick == compPick) {
-                return `Computer also chose ${compPick}, it's a tie!`
+                return `Computer also chose ${compPick}, it's a tie! - Score: ${playerScore} - ${computerScore}`
             } else {
-                return `You lose, ${compPick} beats ${playerPick}`
+                computerScore++
+                return `You lose, ${compPick} beats ${playerPick} - Score: ${playerScore} - ${computerScore}`
             }
     }
 
-    console.log(playRound(playerSelection, computerSelection))
+    function game() {
+                
+        while (playerScore < 4 || computerScore < 4) {
+            console.log(playRound(playerSelection, computerSelection))
+        
+            if (playerScore === 3) {
+                return `Player wins, score: ${playerScore} : ${computerScore}`
+            } else if (computerScore === 3) {
+                return `Computer wins, score: ${computerScore} : ${playerScore}`
+            }
+        }
+    }
 
+    console.log(game())
+    
 </script>
